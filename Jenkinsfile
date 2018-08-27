@@ -7,7 +7,7 @@ pipeline {
                 echo 'Triggering Job1..'
                 script {
                     def path = pwd()
-                    echo '${path}'
+                    echo "${path}"
                 }
                 build job: 'slaveJob', parameters: [string(name: 'param1', value: 'ValueOfParam')]
             }
