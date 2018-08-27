@@ -5,6 +5,8 @@ pipeline {
         stage('Trigger Job1') {
             steps {
                 echo 'Triggering Job1..'
+                def path = pwd()
+                echo '${path}'
                 build job: 'slaveJob', parameters: [string(name: 'param1', value: 'ValueOfParam')]
             }
         }
