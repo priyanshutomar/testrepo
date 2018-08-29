@@ -1,0 +1,5 @@
+scenarioName,rampDuration,testDuration,testUsers
+scenario1,,34,10
+scenario2,20,44,101
+scenario3,13,,1
+scenario4,5,3,45
