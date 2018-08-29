@@ -9,7 +9,7 @@ pipeline {
                     def path = pwd()
                     checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'cd286c7e-b875-4a15-b0e5-e54f0ec6469a', url: 'git@github.com:priyanshutomar/testrepo2.git']]])
                     echo "${path}\n"
-                    println(new File(path + "csvFile.csv").readLines())
+                    println(new File(path + "/csvFile.csv").readLines())
                 }
 //                build job: 'slaveJob', parameters: [string(name: 'param1', value: 'ValueOfParam')]
             }
