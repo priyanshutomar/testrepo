@@ -14,18 +14,30 @@ pipeline {
 //                build job: 'slaveJob', parameters: [string(name: 'param1', value: 'ValueOfParam')]
             }
         }
-/*        stage('Trigger Job2') {
+        stage('Trigger Job2') {
             steps {
                 echo 'Triggering Job2..'
                 build job: 'slaveJob', parameters: [string(name: 'param1', value: 'ValueOfParam')]
                 script {
-                    for (int i = 0; i < 3; i++) {
-                        stage("Test ${i}") {
-                            echo "running stage #${i}"
+                    List<String> content = new File("csvFile.csv").readLines()
+                    def allParams = []
+                    content.eachWithIndex { String line, int i ->
+                        String[] vals = line.split(",")
+                        def params = []
+                        vals.eachWithIndex { String val, int j ->
+                            if (val != null || val.length() > 0) {
+                                params.add(string(name: "${content.get(0).split(",")[j]}", value: "${vals[j]}"))
+                            }
+                        }
+                        allParams.add(params)
+                    }
+                    allParams.each {line ->
+                        stage("Test ") {
+                            build job: 'slaveJob', parameters: line
                         }
                     }
                 }
             }
-        }*/
+        }
     }
 }
