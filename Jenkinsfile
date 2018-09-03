@@ -19,12 +19,12 @@ pipeline {
                 echo 'Triggering Job2..'
                 script {
                     checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'cd286c7e-b875-4a15-b0e5-e54f0ec6469a', url: 'git@github.com:priyanshutomar/testrepo2.git']]])
-                    List<String> content = new File(pwd() + "/csvFile.csv").readLines()
+                    def content = new File(pwd() + "/csvFile.csv").readLines()
                     content.eachWithIndex { String line, int i ->
-                        String[] vals = line.split(",")
+                        def vals = line.split(",")
                         def params = []
                         vals.eachWithIndex { String val, int j ->
-                            if (val != null || val.length() > 0) {
+                            if (!(val == null || val == "")) {
                                 params.add(string(name: "${content.get(0).split(",")[j]}", value: "${vals[j]}"))
                             }
                         }
