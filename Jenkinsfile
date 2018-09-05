@@ -19,7 +19,7 @@ pipeline {
                 echo 'Triggering Job2..'
                 script {
                     def externalCall = load("util.groovy")
-                    externalCall("Tomar")
+                    externalCall(pwd() + "/csvFile.csv")
                     /*
                     checkout([$class: 'GitSCM', branches: [[name: '*\/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'cd286c7e-b875-4a15-b0e5-e54f0ec6469a', url: 'git@github.com:priyanshutomar/testrepo2.git']]])
                     def content = new File(pwd() + "/csvFile.csv").readLines()
